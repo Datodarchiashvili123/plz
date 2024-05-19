@@ -1,0 +1,18 @@
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import {HeaderComponent} from "./header/header.component";
+import {NgOptimizedImage} from "@angular/common";
+import {TagComponent} from "./shared/tag/tag.component";
+import {FiltersComponent} from "./shared/blocks/filters/filters.component";
+import {FooterComponent} from "./footer/footer.component";
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, NgOptimizedImage, HeaderComponent, TagComponent, FiltersComponent, FooterComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent {
+  title = 'play';
+}

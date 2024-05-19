@@ -1,0 +1,47 @@
+<div class="filter" [class.filter--active]="openClose">
+  <div class="" (click)="openCloseDropdown()">
+
+    <span>{{ text }}</span>
+    @if (!openClose) {
+      <img ngSrc="assets/svg/arrow-down.svg" height="8" width="14" alt="arrow">
+    } @else {
+      <img ngSrc="assets/svg/arrow-up.svg" height="8" width="14" alt="arrow">
+    }
+  </div>
+
+    <div class="filter__menu" [class.active]="openClose">
+      @for (item of items;  track item; let i = $index) {
+        <div class="filter__menu__item"
+             (click)="toggleFilters(i)">
+          <img [ngSrc]="toggleStates[i] ? 'assets/svg/true.svg' : 'assets/svg/false.svg'" height="17" width="16"
+               alt="true">
+          <span>{{ item }}</span>
+        </div>
+      }
+
+    <!--    <div class="filter__menu__item" (click)="toggleFilters()">-->
+    <!--      @if (toggle) {-->
+    <!--        <img ngSrc="assets/svg/true.svg" height="17" width="16" alt="true">-->
+    <!--      } @else {-->
+    <!--        <img ngSrc="assets/svg/false.svg" height="17" width="16" alt="true">-->
+    <!--      }-->
+    <!--      <span>Action</span>-->
+    <!--    </div>-->
+    <!--    <div class="filter__menu__item" (click)="toggleFilters()">-->
+    <!--      @if (toggle) {-->
+    <!--        <img ngSrc="assets/svg/true.svg" height="17" width="16" alt="true">-->
+    <!--      } @else {-->
+    <!--        <img ngSrc="assets/svg/false.svg" height="17" width="16" alt="true">-->
+    <!--      }-->
+    <!--      <span>Adventure</span>-->
+    <!--    </div>-->
+    <!--    <div class="filter__menu__item" (click)="toggleFilters()">-->
+    <!--      @if (toggle) {-->
+    <!--        <img ngSrc="assets/svg/true.svg" height="17" width="16" alt="true">-->
+    <!--      } @else {-->
+    <!--        <img ngSrc="assets/svg/false.svg" height="17" width="16" alt="true">-->
+    <!--      }-->
+    <!--      <span>Casual</span>-->
+    <!--    </div>-->
+  </div>
+</div>

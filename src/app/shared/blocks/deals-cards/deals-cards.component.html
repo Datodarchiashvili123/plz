@@ -1,0 +1,10 @@
+<div class="deals">
+  <h3 class="deals__title">{{title}}</h3>
+  <div class="deals__see-all">See All (123)</div>
+</div>
+<div class="deals__cards">
+  @for (card of dealsCards; track dealsCards) {
+    <app-deals-card [name]="card.name" [src]="card.src" [discount]="card.discount"
+                    [price]="card.price"></app-deals-card>
+  }
+</div>
