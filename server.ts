@@ -24,6 +24,11 @@ export function app(): express.Express {
     maxAge: '1y'
   }));
 
+  // Serve robots.txt file
+  server.get('/robots.txt', (req, res) => {
+    res.sendFile(join(browserDistFolder, 'robots.txt'));
+  });
+
   // All regular routes use the Angular engine
   server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
