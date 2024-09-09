@@ -1,62 +1,25 @@
 import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {NgOptimizedImage} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-item-slider',
   standalone: true,
-  imports: [
-    SlickCarouselModule,
-    NgOptimizedImage,
+    imports: [
+        SlickCarouselModule,
+        NgOptimizedImage,
+        RouterLink,
 
-  ],
+    ],
   templateUrl: './item-slider.component.html',
   styleUrl: './item-slider.component.scss',
   encapsulation: ViewEncapsulation.None
 })
 export class ItemSliderComponent {
-  @Input() slides = [
-    {
-      title:"Dragons Dogma",
-      img: "assets/elderRing.png",
-      price:"$31.85"
-    },
-    {
-      title:"Horizon",
-      img: "assets/horizon.png",
-      price:"$31.85"
-    },
-    {
-      title:"Dragons Dogma",
-      img: "assets/elderRing.png",
-      price:"$31.85"
-    },
-    {
-      title:"Horizon",
-      img: "assets/horizon.png",
-      price:"$31.85"
-    },
-    {
-      title:"Dragons Dogma",
-      img: "assets/elderRing.png",
-      price:"$31.85"
-    },
-    {
-      title:"Horizon",
-      img: "assets/horizon.png",
-      price:"$31.85"
-    },
-    {
-      title:"Dragons Dogma",
-      img: "assets/elderRing.png",
-      price:"$31.85"
-    },
-    {
-      title:"Horizon",
-      img: "assets/horizon.png",
-      price:"$31.85"
-    },
-  ];
+  @Input() slides: any = [];
+
+
 
   slideConfig = {
     slidesToShow: 4.7,
@@ -97,4 +60,5 @@ export class ItemSliderComponent {
     console.log('beforeChange');
   }
 
+  protected readonly JSON = JSON;
 }

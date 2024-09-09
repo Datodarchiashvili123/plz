@@ -1,6 +1,6 @@
-<div class="card">
+<div class="card" [routerLink]="game.gameId">
   <div class="card__img">
-    <img [ngSrc]=game.headerImageUrl width="280" height="160" alt="" priority>
+    <img [src]=game.headerImageUrl width="280" height="160" alt="">
   </div>
   <div class="card__content">
 
@@ -17,7 +17,7 @@
       @if (game.lowestPriceText) {
         <div class="" style="text-align: right">
           <span>Official Stories:</span>
-          <p class="card__price--price">{{ game.lowestPriceText }}</p>
+          <p class="card__price--price">{{ game.lowestPriceText.split(' ')[0] }}</p>
         </div>
       } @else if (game.isFree) {
         <span>Official Stories:</span>

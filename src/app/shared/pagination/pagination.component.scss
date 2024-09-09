@@ -22,6 +22,17 @@
     flex-shrink: 0;
     align-self: stretch;
     border-radius: 8px;
+    &--dots{
+      color: #667085;
+      font-family: "SF Pro Display", sans-serif;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 12px;
+    }
     p{
       color: var(--bg-neutral-lowest, #FFF);
       font-family: "SF Pro Display",sans-serif;
@@ -44,6 +55,7 @@
   }
 
   &__button{
+    cursor: pointer;
     display: flex;
     padding: 8px 8px 8px 12px;
     justify-content: center;
@@ -66,4 +78,27 @@
       letter-spacing: 0.5px;
     }
   }
+}
+
+
+.pagination__page {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.pagination__page.active {
+  font-weight: bold;
+  background-color: #C9FF58;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination__button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination__button {
+  display: flex;
+  align-items: center;
 }

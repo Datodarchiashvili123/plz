@@ -3,8 +3,11 @@
   <div class="deals__see-all">See All (123)</div>
 </div>
 <div class="deals__cards">
-  @for (card of dealsCards; track dealsCards) {
-    <app-deals-card [name]="card.name" [src]="card.src" [discount]="card.discount"
-                    [price]="card.price"></app-deals-card>
+  @for (card of dealsCards; track card) {
+    <app-deals-card
+
+                    routerLink="games/{{card.gameId}}"
+                    [name]="card.name" [src]="card.headerImageUrl" [discount]="card.discountPercent"
+                    [price]="card.lowestPriceText"></app-deals-card>
   }
 </div>

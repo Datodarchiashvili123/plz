@@ -1,83 +1,89 @@
 <div class="">
-  <div class=""
-       style="display: flex; flex-direction: column;
+    <div class=""
+         style="display: flex; flex-direction: column;
          justify-content: center; margin-left: auto; margin-right: auto; width: 1400px">
-    <div class="">
+        <div class="">
 
-      <h1 class="page__title">Popular Games</h1>
-      <p class="page__description">This collection of PC games on sale is an ultimate place to view the best that the
-        gaming industry has to offer to its consumers. Explore over 100,000 games with the most popular PC games being
-        shown first. How do we determine the popularity of games? It's simple! The more users visit the price comparison
-        of a game, the higher this game is in our popularity
-        ranking! We aggregate clicks only from the last 72 hours to make sure the ranking keeps up with…</p>
-    </div>
-    <div class="" style="display: flex; gap: 16px; margin-bottom: 24px; margin-top: 24px;">
-      <app-tag [isActive]="true" [text]="'Popular games'"></app-tag>
-      <app-tag  [text]="'Popular games'"></app-tag>
-      <app-tag  [text]="'Pre orders'"></app-tag>
-      <app-tag  [text]="'Steam deck verified'"></app-tag>
-    </div>
-    <app-filters></app-filters>
+            <h1 class="page__title">Popular Games</h1>
+            <p class="page__description">This collection of PC games on sale is an ultimate place to view the best that
+                the
+                gaming industry has to offer to its consumers. Explore over 100,000 games with the most popular PC games
+                being
+                shown first. How do we determine the popularity of games? It's simple! The more users visit the price
+                comparison
+                of a game, the higher this game is in our popularity
+                ranking! We aggregate clicks only from the last 72 hours to make sure the ranking keeps up with…</p>
+        </div>
+        <div class="" style="display: flex; gap: 16px; margin-bottom: 24px; margin-top: 24px;">
+            <app-tag [isActive]="true" [text]="'Popular games'"></app-tag>
+            <app-tag [text]="'Popular games'"></app-tag>
+            <app-tag [text]="'Pre orders'"></app-tag>
+            <app-tag [text]="'Steam deck verified'"></app-tag>
+        </div>
+        <app-filters (filtersChanged)="handleFilterChange($event)"></app-filters>
 
-    <div class="" style="display: flex; justify-content: space-between;">
+        <div class="" style="display: flex; justify-content: space-between;">
 
-      <div class="">
-        @for (game of games; track $index){
-          <app-game-card [game]="game"></app-game-card>
-        }
-      <app-pagination></app-pagination>
-      </div>
-
-
-      <div class="side-nav">
-        <h4 class="side-nav__title">Horizon Forbidden West Complete Edition</h4>
-        <img ngSrc="../assets/image4.png" width="356" height="160" alt="" style="margin-bottom: 24px">
-        <div class="side-nav__content">
-          <div class="mb-32">
-            <p>Developer / Publisher</p>
-            <span>Nixxes Softeare</span>
-            <span>Playstation PC LLC</span>
-          </div>
-
-          <div class="mb-32">
-            <p>Hisorical Low</p>
-            <span class="span-price">-$45.45 </span>
-            <span class="span-price--description">from GameSeal ( expired 15 hours agos)</span>
-          </div>
-
-          <div class="mb-32">
-            <p>Reviews</p>
-            <div class="reviews" style="display: flex; justify-content: space-between">
-              <span class="span-reviews">Steam</span>
-              <span class="span-reviews">Very Positive ( 1820)</span>
-            </div>
-            <div class="slider">
-              <div class="slider--secondary"></div>
-            </div>
-          </div>
-
-          <div class="mb-32">
-            <p>Tags</p>
-            <div class="" style="display: flex; gap: 12px">
-              <div class="tag"># Action</div>
-              <div class="tag"># Singleplayer</div>
+            <div class="">
+                @for (game of games; track $index) {
+                    <div class="" style="display: flex;">
+                        <app-game-card [game]="game"></app-game-card>
+                    </div>
+                }
+                <app-pagination (pageChange)="onPageChange($event)" [currentPage]="currentPage"
+                                [totalPages]="totalPages"></app-pagination>
             </div>
 
-          </div>
 
-          <div class="mb-32">
-            <p>Features</p>
-            <div class="" style="display: flex; gap: 12px">
-              <div class="tag">Full controller support</div>
-              <div class="tag">Single-player</div>
+            <div class="side-nav">
+                <h4 class="side-nav__title">Horizon Forbidden West Complete Edition</h4>
+                <img src="../assets/image4.png" width="356" height="160" alt="" style="margin-bottom: 24px">
+                <div class="side-nav__content">
+                    <div class="mb-32">
+                        <p>Developer / Publisher</p>
+                        <span>Nixxes Softeare</span>
+                        <span>Playstation PC LLC</span>
+                    </div>
+
+                    <div class="mb-32">
+                        <p>Hisorical Low</p>
+                        <span class="span-price">-$45.45 </span>
+                        <span class="span-price--description">from GameSeal ( expired 15 hours agos)</span>
+                    </div>
+
+                    <div class="mb-32">
+                        <p>Reviews</p>
+                        <div class="reviews" style="display: flex; justify-content: space-between">
+                            <span class="span-reviews">Steam</span>
+                            <span class="span-reviews">Very Positive ( 1820)</span>
+                        </div>
+                        <div class="slider">
+                            <div class="slider--secondary"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-32">
+                        <p>Tags</p>
+                        <div class="" style="display: flex; gap: 12px">
+                            <div class="tag"># Action</div>
+                            <div class="tag"># Singleplayer</div>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-32">
+                        <p>Features</p>
+                        <div class="" style="display: flex; gap: 12px">
+                            <div class="tag">Full controller support</div>
+                            <div class="tag">Single-player</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-
-          </div>
-
         </div>
 
-      </div>
     </div>
-
-  </div>
 </div>

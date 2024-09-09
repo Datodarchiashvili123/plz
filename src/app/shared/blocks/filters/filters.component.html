@@ -1,10 +1,24 @@
 <div class="filters">
-  <app-search></app-search>
-  <div class="filters__dropdown">
-    <app-filter [text]="'Price'"></app-filter>
-    <app-filter [text]="'Release date'"></app-filter>
-    <app-filter [text]="'Platforms'"></app-filter>
-    <app-filter [text]="'Genre'"></app-filter>
-    <app-filter [text]="'Tag'"></app-filter>
-  </div>
+    <app-search></app-search>
+    <div class="filters__dropdown">
+        <app-filter [text]="'Genres'"
+                    [idKey]="'genreId'"
+                    [items]="genres"
+                    (filterChanged)="onFilterChange('genres', $event)"></app-filter>
+
+        <app-filter [text]="'Platforms'"
+                    [idKey]="'platformId'"
+                    [items]="platforms"
+                    (filterChanged)="onFilterChange('primaryPlatforms', $event)"></app-filter>
+
+        <app-filter [text]="'Developers'"
+                    [idKey]="'developerId'"
+                    [items]="developers"
+                    (filterChanged)="onFilterChange('developers', $event)"></app-filter>
+
+        <app-filter [text]="'Publishers'"
+                    [items]="publishers"
+                    [idKey]="'publisherId'"
+                    (filterChanged)="onFilterChange('publishers', $event)"></app-filter>
+    </div>
 </div>

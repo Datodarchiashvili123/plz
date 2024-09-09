@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgClass, NgOptimizedImage} from "@angular/common";
 
 @Component({
@@ -15,7 +15,15 @@ export class FilterComponent {
   toggleStates: boolean[] = []; // Array to store the state of each checkbox
   openClose = false;
   @Input() text = 'Price';
-  items = ['Action', 'Adventure', 'Casual'];
+  @Input() idKey = 'genreId'; // Add this input to accept the correct ID key
+  @Input() items = [{
+    genreId: 1,
+    name: 'Price',
+  }];
+
+  @Output() filterChanged = new EventEmitter<any>();
+  selectedItems: number[] = []; // Stores the IDs of selected items.
+
 
   constructor() {
     // Initialize the toggle states array with false values for each checkbox
@@ -23,9 +31,19 @@ export class FilterComponent {
   }
 
   toggleFilters(index: number) {
-    // Toggle the state of the checkbox at the specified index
+    // Toggle the state of the checkbox at the specified index.
     this.toggleStates[index] = !this.toggleStates[index];
+    const selectedId = (this.items[index] as any)[this.idKey]; // Cast the item to 'any' to allow dynamic indexing
+    if (this.toggleStates[index]) {
+      this.selectedItems.push(selectedId); // Add to selected items if checked.
+    } else {
+      this.selectedItems = this.selectedItems.filter(id => id !== selectedId); // Remove from selected items if unchecked.
+    }
+
+    this.filterChanged.emit(this.selectedItems); // Emit the array of selected IDs.
   }
+
+
   openCloseDropdown(){
     this.openClose = !this.openClose;
   }

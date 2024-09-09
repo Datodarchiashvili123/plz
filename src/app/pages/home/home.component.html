@@ -1,21 +1,30 @@
+
 <div class="home-page" style="">
-  <div class="" style="border-radius: 12px; overflow: hidden">
-    <img [ngSrc]="'assets/cover.png'" width="1400" height="280" alt="cover" priority>
-  </div>
-  <!-- You can now use your library component in app.component.html -->
-  <div class="slider-header">
-    <div class="slider-header__left">
-      <img ngSrc="assets/svg/fire.svg" alt="" width="24" height="24">
-      <h4>MOST POPULAR GAMES</h4>
+    <div class="" style="border-radius: 12px; overflow: hidden">
+        <img [src]="'assets/cover.jpg'" width="1400" height="280" alt="cover">
     </div>
-    <div class="slider-header__right">
-      See All
+    <!-- You can now use your library component in app.component.html -->
+    <div class="slider-header">
+        <div class="slider-header__left">
+            <img ngSrc="assets/svg/fire.svg" alt="" width="24" height="24">
+            <h4>MOST POPULAR GAMES</h4>
+        </div>
+        <div class="slider-header__right" routerLink="/games">
+            See All
+        </div>
     </div>
-  </div>
-  <app-item-slider [slides]="sliderData"></app-item-slider>
-  <div class="" style="display: flex; gap: 16px">
-    <app-deals-cards [title]="'New Deals'" [dealsCards]="dealsCards"></app-deals-cards>
-    <app-deals-cards [title]="'Best Deals'" [dealsCards]="dealsCards"></app-deals-cards>
-  </div>
+
+
+    @if (sliderData) {
+        <app-item-slider [slides]="sliderData"/>
+    }
+    <div class="" style="display: flex; gap: 16px">
+        @if (newDeals) {
+            <app-deals-cards [title]="'New Deals'" [dealsCards]="newDeals"/>
+        }
+        @if (bestDeals) {
+            <app-deals-cards [title]="'Best Deals'" [dealsCards]="bestDeals"/>
+        }
+    </div>
 </div>
 

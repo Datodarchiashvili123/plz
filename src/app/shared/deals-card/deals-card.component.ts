@@ -1,11 +1,12 @@
 import {Component, Input} from '@angular/core';
-import {NgOptimizedImage} from "@angular/common";
+import {NgIf, NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-deals-card',
   standalone: true,
   imports: [
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgIf
   ],
   templateUrl: './deals-card.component.html',
   styleUrl: './deals-card.component.scss'
