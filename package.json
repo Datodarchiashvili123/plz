@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
 
-    "postbuild": "sudo node generate-sitemap.js",
+    "postbuild": "node generate-sitemap.js",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
