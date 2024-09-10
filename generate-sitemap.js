@@ -10,8 +10,8 @@ urls.push({ url: `/`, changefreq: 'daily', priority: 1 });
 urls.push({ url: `/games`, changefreq: 'daily', priority: 0.85 });
 
 // Assuming your game IDs range from 1 to 55
-for (let id = 1; id <= 1000; id++) {
-    urls.push({ url: `/games/${id}`, changefreq: 'daily', priority: 0.8 });
+for (let id = 1; id <= 700; id++) {
+    urls.push({ url: `/games/${id}`, changefreq: 'monthly', priority: 0.5 });
 }
 
 // Add URLs to the stream and generate the sitemap
