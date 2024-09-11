@@ -76,9 +76,6 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        if (this.gameId) {
-            this.loadGameDetail(this.gameId);
-        }
         this.routeSub = this.route.params.subscribe(params => {
             this.gameId = params['id'];
             this.loadGameDetail(this.gameId);

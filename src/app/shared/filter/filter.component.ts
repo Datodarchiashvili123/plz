@@ -1,13 +1,15 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgClass, NgOptimizedImage} from "@angular/common";
+import {ClickOutsideDirective} from "../../directives/click-outside.directive";
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [
-    NgOptimizedImage,
-    NgClass
-  ],
+    imports: [
+        NgOptimizedImage,
+        NgClass,
+        ClickOutsideDirective
+    ],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss'
 })
@@ -46,5 +48,8 @@ export class FilterComponent {
 
   openCloseDropdown(){
     this.openClose = !this.openClose;
+  }
+  closeDropdown(){
+    this.openClose = false;
   }
 }

@@ -23,7 +23,6 @@ export class GamesService {
       }
       if (filters) {
           Object.keys(filters).forEach(key => {
-              debugger;
               const filterValue = filters[key];
               if (Array.isArray(filterValue)) { // Check if the filter value is an array (multi-select case).
                   filterValue.forEach((value: any) => {

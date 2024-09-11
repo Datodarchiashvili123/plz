@@ -39,15 +39,11 @@ export class GamesComponent implements OnInit {
     // Fetch games for the current page
     loadGames(page: number, filters: any = {} ) {
         this.gamesService.getGames(page, 10, filters).subscribe(data => {
-            debugger
             this.games = data.results;
             this.totalPages = data.totalPages;
             this.currentPage = data.currentPage;
-            console.log(this.games, ' games');
-
         });
     }
-
 
     onPageChange(newPage: number) {
         this.currentPage = newPage;

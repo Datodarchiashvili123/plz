@@ -1,19 +1,22 @@
-.filter{
+.filter {
   color: #FFF;
-  font-family: Jura,sans-serif;
+  font-family: Jura, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   position: relative;
   cursor: pointer;
-  span{
+
+  span {
     margin-right: 8px;
   }
-  &--active{
+
+  &--active {
     color: #C9FF58;
   }
-  &__menu{
+
+  &__menu {
     max-height: 350px;
     overflow-y: auto;
     display: none;
@@ -26,7 +29,8 @@
     border: 1px solid rgba(217, 217, 217, 0.20);
     background: #272727;
     top: 50px;
-    &__item{
+
+    &__item {
       display: flex;
       padding: 12px;
       align-items: center;
@@ -35,15 +39,18 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.10);
       background: #212121;
       cursor: pointer;
-      &:first-child{
+
+      &:first-child {
         border-top-right-radius: 12px;
         border-top-left-radius: 12px;
       }
-      &:last-child{
+
+      &:last-child {
         border-bottom-right-radius: 12px;
         border-bottom-left-radius: 12px;
       }
-      span{
+
+      span {
         color: #FFF;
         font-family: Jura, sans-serif;
         font-size: 14px;
@@ -52,7 +59,8 @@
         line-height: normal;
       }
     }
-    &.active{
+
+    &.active {
       display: flex;
 
     }
