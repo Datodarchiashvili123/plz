@@ -2,8 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {SearchComponent} from "../../search/search.component";
 import {TagComponent} from "../../tag/tag.component";
 import {FilterComponent} from "../../filter/filter.component";
-import {SearchService} from "../../../services/search.service";
 import {FiltersService} from "../../../services/filters.service";
+import {ReactiveFormsModule} from "@angular/forms";
 
 type FilterType = 'price' | 'developers' | 'publishers' | 'genres' | 'primaryPlatforms';
 
@@ -14,7 +14,8 @@ type FilterType = 'price' | 'developers' | 'publishers' | 'genres' | 'primaryPla
     imports: [
         SearchComponent,
         TagComponent,
-        FilterComponent
+        FilterComponent,
+        ReactiveFormsModule
     ],
     templateUrl: './filters.component.html',
     styleUrl: './filters.component.scss'
@@ -28,9 +29,13 @@ export class FiltersComponent implements OnInit {
     developers: any;
     publishers: any;
     platforms: any;
+    searchValue: string = '';
+    private debounceTimer: any;
 
 
     @Output() filtersChanged = new EventEmitter<any>();
+    @Output() searchChanged = new EventEmitter<string>();
+
 
     constructor(private filtersService: FiltersService) {
 
@@ -56,7 +61,6 @@ export class FiltersComponent implements OnInit {
     }
 
 
-
     // Example filter data structure
     filters: Partial<Record<FilterType, any>> = {
         price: '',
@@ -71,4 +75,19 @@ export class FiltersComponent implements OnInit {
         this.filtersChanged.emit(this.filters);
     }
 
+
+    onSearchChange(event: Event) {
+        const input = event.target as HTMLInputElement;
+        this.searchValue = input.value;
+
+        // Clear the previous debounce timer
+        if (this.debounceTimer) {
+            clearTimeout(this.debounceTimer);
+        }
+
+        // Set a new debounce timer with 0.5 seconds delay
+        this.debounceTimer = setTimeout(() => {
+            this.searchChanged.emit(this.searchValue);
+        }, 500); // 500 milliseconds delay
+    }
 }

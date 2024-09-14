@@ -1,6 +1,5 @@
 <div class="filter" [class.filter--active]="openClose">
     <div appClickOutside (clickOutside)="closeDropdown()" (click)="openCloseDropdown()">
-
         <span>{{ text }}</span>
         @if (!openClose) {
             <img src="assets/svg/arrow-down.svg" height="8" width="14" alt="arrow">

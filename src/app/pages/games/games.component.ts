@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FiltersComponent} from "../../shared/blocks/filters/filters.component";
 import {HeaderComponent} from "../../header/header.component";
 import {NgOptimizedImage} from "@angular/common";
@@ -27,18 +27,21 @@ export class GamesComponent implements OnInit {
     totalPages = 0;
     currentPage = 1;
     games: any;
-    currentFilters: any = {}; // Store current filters here
+    currentFilters: any = {};
+    orderBy: string = 'Popularity'// Store current filters here
+    searchValue: string = '';
+
 
     constructor(private gamesService: GamesService) {
     }
 
     ngOnInit() {
-        this.loadGames(this.currentPage, this.currentFilters); // Load games with current filters
+        this.loadGames(this.currentPage, this.currentFilters, this.orderBy, this.searchValue); // Load games with current filters
     }
 
     // Fetch games for the current page
-    loadGames(page: number, filters: any = {} ) {
-        this.gamesService.getGames(page, 10, filters).subscribe(data => {
+    loadGames(page: number, filters: any = {}, orderBy?: string, name?: string) {
+        this.gamesService.getGames(page, 10, filters, orderBy, name).subscribe(data => {
             this.games = data.results;
             this.totalPages = data.totalPages;
             this.currentPage = data.currentPage;
@@ -47,13 +50,24 @@ export class GamesComponent implements OnInit {
 
     onPageChange(newPage: number) {
         this.currentPage = newPage;
-        this.loadGames(this.currentPage, this.currentFilters); // Fetch the data for the new page
+        this.loadGames(this.currentPage, this.currentFilters, this.orderBy, this.searchValue); // Fetch the data for the new page
     }
 
     // In your games component
     handleFilterChange(filters: any) {
         this.currentFilters = filters;
         this.currentPage = 1;// Update the current filters
-        this.loadGames(1, this.currentFilters);
+        this.loadGames(1, this.currentFilters, this.orderBy, this.searchValue);
+    }
+
+    onSortChange(event: any) {
+        this.orderBy = event
+        this.loadGames(this.currentPage, this.currentFilters, this.orderBy, this.searchValue);
+    }
+
+    handleSearchChange(search: string) {
+        debugger
+        this.searchValue = search;
+        this.loadGames(1, this.currentFilters, this.orderBy, this.searchValue);
     }
 }

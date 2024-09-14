@@ -15,10 +15,10 @@
     <div class="shop-now">
         <div class="shop-now__price">
             <p class="shop-now__price__text">Official Stories:</p>
-            <p class="shop-now__price__value">{{ game?.currentPrice.split(' ')[0] }}</p>
+            <p class="shop-now__price__value">{{ offers?.currentPrice.split(' ')[0] }}</p>
             <p class="shop-now__price__text">Current Price</p>
         </div>
-        <a href="{{game?.steamUrl}}" target="_blank" style="cursor: pointer; text-decoration: none">
+        <a href="{{offers?.redirectUrl}}" target="_blank" style="cursor: pointer; text-decoration: none">
                 <button class="shop-now__button shop-now__button__text">Shop Now</button>
         </a>
     </div>
@@ -26,7 +26,7 @@
 
 
 @if (game?.about?.aboutTheGame !== '' || gallery !== undefined && gallery?.length) {
-    <h2 class="about-title">About {{ game?.offer?.deals[0]?.name }}</h2>
+    <h2 class="about-title">About {{ game?.name }}</h2>
 }
 
 <div class="" style="display: flex; gap: 24px">
@@ -69,6 +69,14 @@
                 </ngx-slick-carousel>
             </div>
         }
+        @if (game?.about?.aboutTheGame !== '') {
+            <div class="">
+                <div class="about">
+                    <div [innerHTML]="sanitizedAboutTheGame"></div>
+                </div>
+            </div>
+
+        }
     </div>
     <div class="system-requirements">
         <p class="system-requirements__title">System Requirements</p>
@@ -77,12 +85,5 @@
     </div>
 </div>
 
-@if (game?.about?.aboutTheGame !== '') {
-    <div class="">
-        <div class="about">
-            <div [innerHTML]="sanitizedAboutTheGame"></div>
-        </div>
-    </div>
 
-}
 

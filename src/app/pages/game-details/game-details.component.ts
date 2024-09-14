@@ -65,6 +65,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     game: any;
     gallery: any;
     sanitizedAboutTheGame: any;
+    offers: any;
     private routeSub: Subscription | undefined;
 
     constructor(
@@ -79,6 +80,8 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
         this.routeSub = this.route.params.subscribe(params => {
             this.gameId = params['id'];
             this.loadGameDetail(this.gameId);
+            this.loadGalleryDetail(this.gameId);
+            this.loadGameOffers(this.gameId);
         });
     }
 
@@ -86,11 +89,27 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
         this.gameDetailsService.getGameDetails(gameId).subscribe(
             res => {
                 this.game = res;
-                this.gallery = this.game.about.gallery.galleryContent;
                 console.log(this.game);
                 this.sanitizedAboutTheGame = this.sanitizer.bypassSecurityTrustHtml(this.game.about.aboutTheGame);
             }
         )
+    }
+
+    loadGalleryDetail(gameId: any) {
+        this.gameDetailsService.getGameGallery(gameId).subscribe({
+            next:(res:any)=>{
+                this.gallery = res.galleryContent;
+            }
+        })
+    }
+
+    loadGameOffers(gameId: any) {
+        this.gameDetailsService.getGameOffers(gameId).subscribe({
+            next:(res:any)=>{
+                console.log(res, ' res ')
+                this.offers = res.deals[0]
+            }
+        })
     }
 
     ngOnDestroy() {
