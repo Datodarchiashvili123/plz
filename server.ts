@@ -24,6 +24,16 @@ export function app(): express.Express {
     maxAge: '1y'
   }));
 
+  // Serve the Google verification HTML file
+  server.get('/google7ff99fd29e799a03.html', (req, res, next) => {
+    res.sendFile(join(browserDistFolder, 'google7ff99fd29e799a03.html'), (err) => {
+      if (err) {
+        console.error('Error serving google verification file:', err);
+        next(err);
+      }
+    });
+  });
+
   server.get('/robots.txt', (req, res, next) => {
     res.sendFile(join(__dirname, 'dist', 'play', 'assets', 'robots.txt'), (err) => {
       if (err) {
