@@ -7,6 +7,9 @@
   align-self: stretch;
   background: #1B1B1B;
   width: 692px;
+  &:hover{
+    background: #242424;
+  }
   &__left{
     display: flex;
     align-items: center;
