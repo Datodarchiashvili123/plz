@@ -52,32 +52,41 @@ export class HomeComponent implements OnInit {
             {
                 name: 'description',
                 content: `Find the best game deals on top titles with huge discounts! Explore daily offers and save big on the latest video games for all platforms. Don't miss out!`
-            },
-            { name: 'keywords', content: 'popular games, video game deals, new game releases, game discounts, best game deals, cheap video games, top-rated games, gaming offers, latest game discounts, game sales, PC games, console games, Xbox deals, PlayStation deals, Steam deals, game bundles, playze.io' }
+            }
         ]);
 
+        // Fetch top game cards and update meta keywords
         this.homeService.getTopGameCards().subscribe((x: any) => {
             this.gamesData = x.popularGames;
 
-            this.sliderData = x.popularGames.map((x: any) => {
+            this.sliderData = x.popularGames.map((game: any) => {
                 return {
-                    title: x.name,
-                    img: x.headerImageUrl,
-                    price: x.lowestPriceText,
-                    hasPrice: x.hasPrice,
-                    gameId: x.gameId
+                    title: game.name,
+                    img: game.headerImageUrl,
+                    price: game.lowestPriceText,
+                    hasPrice: game.hasPrice,
+                    gameId: game.gameId
                 }
-            })
+            });
+
+            // Create a keywords string from game names
+            const keywords = x.popularGames.map((game: any) => game.name).join(', ');
+
+            // Set meta keywords
+            this.metaService.updateTag({
+                name: 'keywords',
+                content: `${keywords}, popular games, video game deals, new game releases, game discounts, best game deals, cheap video games, top-rated games, gaming offers, latest game discounts, game sales, PC games, console games, Xbox deals, PlayStation deals, Steam deals, game bundles, playze.io`
+            });
         });
 
-
         this.homeService.getDealCards(1).subscribe((x: any) => {
-            this.newDeals = x.dealCards
-        })
+            this.newDeals = x.dealCards;
+        });
 
         this.homeService.getDealCards(2).subscribe((x: any) => {
-            this.bestDeals = x.dealCards
-        })
+            this.bestDeals = x.dealCards;
+        });
     }
+
 
 }
