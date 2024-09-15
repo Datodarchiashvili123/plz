@@ -9,7 +9,7 @@
     @for (slide of slides; track $index) {
         <div ngxSlickItem class="slide" routerLink="/games/{{slide.gameId}}">
             @if (slide?.img) {
-                <img src="{{ slide.img }}" alt="" width="280" height="160">
+                <img ngSrc="{{ slide.img }}" alt="{{slide.title}}" width="280" height="131">
             }
             <div class="slide__tag"><span>#{{ 1 + $index }}</span></div>
             <div class="slide__description">

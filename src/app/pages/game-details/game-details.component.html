@@ -2,7 +2,7 @@
     <div class="short-description">
         <div class="short-description__container">
             <div class="short-description__container__img">
-                @if(game?.imgUrl){
+                @if (game?.imgUrl) {
                     <img [ngSrc]="game.imgUrl" alt="{{game?.name}}" fill>
                 }
             </div>
@@ -19,7 +19,7 @@
             <p class="shop-now__price__text">Current Price</p>
         </div>
         <a href="{{offers?.redirectUrl}}" target="_blank" style="cursor: pointer; text-decoration: none">
-                <button class="shop-now__button shop-now__button__text">Shop Now</button>
+            <button class="shop-now__button shop-now__button__text">Shop Now</button>
         </a>
     </div>
 </div>
@@ -29,8 +29,8 @@
     <h2 class="about-title">About {{ game?.name }}</h2>
 }
 
-<div class="" style="display: flex; gap: 24px">
-    <div class="">
+<div class="" style="display: flex; gap: 24px; width: 100%">
+    <div class="" style="width: 100%">
         @if (gallery !== undefined && gallery.length) {
             <!-- Main display carousel -->
             <div class="main-carousel">
@@ -75,14 +75,26 @@
                     <div [innerHTML]="sanitizedAboutTheGame"></div>
                 </div>
             </div>
-
         }
+
     </div>
-    <div class="system-requirements">
-        <p class="system-requirements__title">System Requirements</p>
-        <div class="system-requirements__min-max"  [innerHTML]="game?.about?.systemRequirements[0]?.recommended"></div>
-        <div class="system-requirements__min-max"  [innerHTML]="game?.about?.systemRequirements[0]?.minimum"></div>
+    <div class="">
+        @if (game?.about?.systemRequirements[0]?.recommended || game?.about?.systemRequirements[0]?.minimum) {
+
+            <div class="system-requirements">
+                <p class="system-requirements__title">System Requirements</p>
+                <div class="system-requirements__min-max"
+                     [innerHTML]="game?.about?.systemRequirements[0]?.recommended"></div>
+                <div class="system-requirements__min-max"
+                     [innerHTML]="game?.about?.systemRequirements[0]?.minimum"></div>
+            </div>
+        }
+
+        <div class="" style="margin-top: 15px;">
+            <app-game-detail-card [gameId]="gameId" [gameName]="game?.name"></app-game-detail-card>
+        </div>
     </div>
+
 </div>
 
 

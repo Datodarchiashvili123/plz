@@ -6,6 +6,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {SearchDropdownComponent} from "../../shared/search-dropdown/search-dropdown.component";
+import {GameDetailCardComponent} from "../../shared/game-detail-card/game-detail-card.component";
 
 @Component({
     selector: 'app-game-details',
@@ -16,6 +17,7 @@ import {SearchDropdownComponent} from "../../shared/search-dropdown/search-dropd
         NgIf,
         NgOptimizedImage,
         SearchDropdownComponent,
+        GameDetailCardComponent,
     ],
     templateUrl: './game-details.component.html',
     styleUrl: './game-details.component.scss'

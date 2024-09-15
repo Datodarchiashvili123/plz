@@ -7,7 +7,9 @@
     <app-deals-card
 
                     routerLink="games/{{card.gameId}}"
-                    [name]="card.name" [src]="card.headerImageUrl" [discount]="card.discountPercent"
+                    [name]="card.name"
+                    [src]="card.headerImageUrl"
+                    [discount]="card.discountPercent"
                     [price]="card.lowestPriceText.split(' ')[0]"></app-deals-card>
   }
 </div>
