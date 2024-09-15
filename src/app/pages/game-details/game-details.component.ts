@@ -24,15 +24,6 @@ import {GameDetailCardComponent} from "../../shared/game-detail-card/game-detail
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
 
-    slides = [
-        {img: "assets/img.png", index: 0},
-        {img: "assets/img2.png", index: 1},
-        {img: "assets/img.png", index: 2},
-        {img: "assets/img2.png", index: 3},
-        {img: "assets/img2.png", index: 4},
-
-    ];
-
     mainSlideConfig = {
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -99,7 +90,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
     loadGalleryDetail(gameId: any) {
         this.gameDetailsService.getGameGallery(gameId).subscribe({
-            next:(res:any)=>{
+            next: (res: any) => {
                 this.gallery = res.galleryContent;
             }
         })
@@ -107,7 +98,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
     loadGameOffers(gameId: any) {
         this.gameDetailsService.getGameOffers(gameId).subscribe({
-            next:(res:any)=>{
+            next: (res: any) => {
                 console.log(res, ' res ')
                 this.offers = res.deals[0]
             }
