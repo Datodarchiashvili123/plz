@@ -7,7 +7,7 @@ import {GameCardComponent} from "../../shared/game-card/game-card.component";
 import {PaginationComponent} from "../../shared/pagination/pagination.component";
 import {GamesService} from "./games.service";
 import {SearchDropdownComponent} from "../../shared/search-dropdown/search-dropdown.component";
-import {GameItemHoverComponent} from "../../shared/game-item-hover/game-item-hover.component";
+import {GameDetailCardComponent} from "../../shared/game-detail-card/game-detail-card.component";
 
 @Component({
     selector: 'app-games',
@@ -20,7 +20,7 @@ import {GameItemHoverComponent} from "../../shared/game-item-hover/game-item-hov
         GameCardComponent,
         PaginationComponent,
         SearchDropdownComponent,
-        GameItemHoverComponent,
+        GameDetailCardComponent,
     ],
     templateUrl: './games.component.html',
     styleUrl: './games.component.scss'
