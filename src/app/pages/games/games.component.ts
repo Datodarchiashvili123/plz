@@ -7,7 +7,7 @@ import {GameCardComponent} from "../../shared/game-card/game-card.component";
 import {PaginationComponent} from "../../shared/pagination/pagination.component";
 import {GamesService} from "./games.service";
 import {SearchDropdownComponent} from "../../shared/search-dropdown/search-dropdown.component";
-import {GameDetailCardComponent} from "../../shared/game-detail-card/game-detail-card.component";
+import {GameItemHoverComponent} from "../../shared/game-item-hover/game-item-hover.component";
 
 @Component({
     selector: 'app-games',
@@ -20,7 +20,7 @@ import {GameDetailCardComponent} from "../../shared/game-detail-card/game-detail
         GameCardComponent,
         PaginationComponent,
         SearchDropdownComponent,
-        GameDetailCardComponent,
+        GameItemHoverComponent,
     ],
     templateUrl: './games.component.html',
     styleUrl: './games.component.scss'
@@ -50,7 +50,7 @@ export class GamesComponent implements OnInit {
             this.games = data.results;
             this.totalPages = data.totalPages;
             this.currentPage = data.currentPage;
-            this.onHover(this.games[0].gameId,this.games[0].name);
+            this.onHover(this.games[0].gameId, this.games[0].name);
         });
     }
 
@@ -78,9 +78,9 @@ export class GamesComponent implements OnInit {
     }
 
     // Triggered on mouse enter
-    onMouseEnter(gameId: any, gameName:any, gameImage:any) {
+    onMouseEnter(gameId: any, gameName: any, gameImage: any) {
         this.hoverTimeout = setTimeout(() => {
-            this.onHover(gameId,gameName,gameImage); // Only call this after 0.5 sec
+            this.onHover(gameId, gameName, gameImage); // Only call this after 0.5 sec
         }, 500); // 0.5 seconds delay
     }
 
