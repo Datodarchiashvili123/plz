@@ -5,7 +5,6 @@
 <div class="deals__cards">
   @for (card of dealsCards; track card) {
     <app-deals-card
-
                     routerLink="games/{{card.gameId}}"
                     [name]="card.name"
                     [src]="card.headerImageUrl"

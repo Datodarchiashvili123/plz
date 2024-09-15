@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GameDetailsService} from "./game-details.service";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer, Meta, Title} from "@angular/platform-browser"; // Add Meta and Title imports
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {SearchDropdownComponent} from "../../shared/search-dropdown/search-dropdown.component";
@@ -49,10 +49,8 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
                     slidesToShow: 2.5 // Adjust number of slides for smaller screens
                 }
             }
-            // Add more breakpoints and settings as needed
         ]
     };
-
 
     gameId: string | null = null;
     game: any;
@@ -65,6 +63,8 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private gameDetailsService: GameDetailsService,
         private sanitizer: DomSanitizer,
+        private titleService: Title, // Inject Title service
+        private metaService: Meta    // Inject Meta service
     ) {
         this.gameId = this.route.snapshot.paramMap.get('id');
     }
@@ -84,8 +84,11 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
                 this.game = res;
                 console.log(this.game);
                 this.sanitizedAboutTheGame = this.sanitizer.bypassSecurityTrustHtml(this.game.about.aboutTheGame);
+
+                // Set Meta Tags dynamically when game details are loaded
+                this.updateMetaTags();
             }
-        )
+        );
     }
 
     loadGalleryDetail(gameId: any) {
@@ -93,16 +96,32 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
             next: (res: any) => {
                 this.gallery = res.galleryContent;
             }
-        })
+        });
     }
 
     loadGameOffers(gameId: any) {
         this.gameDetailsService.getGameOffers(gameId).subscribe({
             next: (res: any) => {
-                console.log(res, ' res ')
-                this.offers = res.deals[0]
+                console.log(res, ' res ');
+                this.offers = res.deals[0];
             }
-        })
+        });
+    }
+
+    // Method to update meta tags dynamically based on game data
+    updateMetaTags() {
+        const title = `${this.game.name} - Buy Now at Best Price!`;
+        const description = `Get the best deals on ${this.game.name}. Explore reviews, screenshots, and offers for ${this.game.name} and similar games.`;
+        const keywords = `${this.game.name}, buy ${this.game.name}, ${this.game.name} deals, video game deals, best price for ${this.game.name}, gaming offers`;
+
+        // Set the title
+        this.titleService.setTitle(title);
+
+        // Set the description and keywords
+        this.metaService.addTags([
+            { name: 'description', content: description },
+            { name: 'keywords', content: keywords },
+        ]);
     }
 
     ngOnDestroy() {
@@ -110,5 +129,4 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
             this.routeSub.unsubscribe();
         }
     }
-
 }

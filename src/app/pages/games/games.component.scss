@@ -9,7 +9,7 @@
 }
 
 
-.page__title{
+.page__title {
   color: #FFF;
   font-family: Jura, sans-serif;
   font-size: 16px;
@@ -20,7 +20,7 @@
   margin-block-end: 22px;
 }
 
-.page__description{
+.page__description {
   color: rgba(#FFF, 0.7);
   font-family: Jura, sans-serif;
   font-size: 12px;
@@ -62,4 +62,11 @@
 .games-card {
   height: 100%; /* Or any height */
   overflow-y: auto;
+}
+
+.presets {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  margin-top: 24px;
 }

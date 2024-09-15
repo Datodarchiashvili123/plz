@@ -1,8 +1,13 @@
 <div class="deals">
 
   <div class="deals__left" >
+      @if (!src){
+          <div class="test"></div>
+      }
       @if (src){
-          <img ngSrc="{{src}}" alt="{{name}}" width="160" height="75">
+          <img
+                  loading="lazy" fetchpriority="auto"
+                  ngSrc="{{src}}" alt="{{name}}" width="160" height="75">
       }
 
     <p>{{ name }}</p>
