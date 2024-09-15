@@ -1,21 +1,23 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgClass, NgOptimizedImage} from "@angular/common";
+import {NgClass, NgOptimizedImage, NgStyle} from "@angular/common";
 import {ClickOutsideDirective} from "../../directives/click-outside.directive";
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-    imports: [
-        NgOptimizedImage,
-        NgClass,
-        ClickOutsideDirective
-    ],
+  imports: [
+    NgOptimizedImage,
+    NgClass,
+    ClickOutsideDirective,
+    NgStyle
+  ],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss'
 })
 export class FilterComponent {
   toggleStates: boolean[] = []; // Array to store the state of each checkbox
   openClose = false;
+  @Input() last = false;
   @Input() text = 'Price';
   @Input() idKey = 'genreId'; // Add this input to accept the correct ID key
   @Input() items = [{

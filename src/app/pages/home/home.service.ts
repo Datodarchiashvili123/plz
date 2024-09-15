@@ -26,7 +26,7 @@ export class HomeService {
             this.transferState.remove(DEAL_CARDS_KEY(id));
             return of(cachedData);
         } else {
-            return this.http.get(`${environment.apiUrl}/deal/dealcards?PresetTypeId=${id}`)
+            return this.http.get(`${environment.apiUrl}/deal/dealcards?PresetTypeId=${id}&take=10`)
                 .pipe(
                     map((res: any) => {
                         // Store the result in TransferState with the dynamic key

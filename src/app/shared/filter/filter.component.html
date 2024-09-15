@@ -1,4 +1,5 @@
-<div class="filter" [class.filter--active]="openClose">
+<div class="filter"
+     [class.filter--active]="openClose">
     <div appClickOutside (clickOutside)="closeDropdown()" (click)="openCloseDropdown()">
         <span>{{ text }}</span>
         @if (!openClose) {
@@ -7,7 +8,9 @@
             <img src="assets/svg/arrow-up.svg" height="8" width="14" alt="arrow">
         }
     </div>
-    <div class="filter__menu" [class.active]="openClose">
+    <div class="filter__menu"
+         [class.active]="openClose"
+         [ngStyle]="last ? {'right': '-20px'} : {}">
         @for (item of items; track item; let i = $index) {
             <div class="filter__menu__item"
                  (click)="toggleFilters(i)">

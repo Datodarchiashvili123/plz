@@ -29,6 +29,12 @@
     border: 1px solid rgba(217, 217, 217, 0.20);
     background: #272727;
     top: 50px;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+
+    &::-webkit-scrollbar {
+      display: none; /* For Chrome, Safari, and Opera */
+    }
 
     &__item {
       display: flex;

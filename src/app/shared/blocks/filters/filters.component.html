@@ -25,7 +25,8 @@
                     [items]="developers"
                     (filterChanged)="onFilterChange('developers', $event)"></app-filter>
 
-        <app-filter [text]="'Publishers'"
+        <app-filter [last]="true"
+                    [text]="'Publishers'"
                     [items]="publishers"
                     [idKey]="'publisherId'"
                     (filterChanged)="onFilterChange('publishers', $event)"></app-filter>

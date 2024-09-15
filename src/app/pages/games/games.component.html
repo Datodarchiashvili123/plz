@@ -15,10 +15,14 @@
                 ranking! We aggregate clicks only from the last 72 hours to make sure the ranking keeps up with…</p>
         </div>
         <div class="" style="display: flex; gap: 16px; margin-bottom: 24px; margin-top: 24px;">
-            <app-tag (tagClicked)="onSortChange($event)" [value]="'Popularity'" [isActive]="orderBy=='Popularity'" [text]="'Most Popular'"></app-tag>
-            <app-tag (tagClicked)="onSortChange($event)" [value]="'PriceHighest'" [text]="'Premium'" [isActive]="orderBy=='PriceHighest'"></app-tag>
-            <app-tag (tagClicked)="onSortChange($event)" [value]="'PriceLowest'" [text]="'Best Deals'" [isActive]="orderBy=='PriceLowest'"></app-tag>
-            <app-tag (tagClicked)="onSortChange($event)" [value]="'AZ'" [text]="'A to Z'" [isActive]="orderBy=='AZ'"></app-tag>
+            <app-tag (tagClicked)="onSortChange($event)" [value]="'Popularity'" [isActive]="orderBy=='Popularity'"
+                     [text]="'Most Popular'"></app-tag>
+            <app-tag (tagClicked)="onSortChange($event)" [value]="'PriceHighest'" [text]="'Premium'"
+                     [isActive]="orderBy=='PriceHighest'"></app-tag>
+            <app-tag (tagClicked)="onSortChange($event)" [value]="'PriceLowest'" [text]="'Best Deals'"
+                     [isActive]="orderBy=='PriceLowest'"></app-tag>
+            <app-tag (tagClicked)="onSortChange($event)" [value]="'AZ'" [text]="'A to Z'"
+                     [isActive]="orderBy=='AZ'"></app-tag>
         </div>
         <app-filters
                 (filtersChanged)="handleFilterChange($event)"
@@ -26,10 +30,11 @@
         ></app-filters>
 
         <div class="" style="display: flex; justify-content: space-between;">
-
             <div class="">
                 @for (game of games; track $index) {
-                    <div class="" style="display: flex;">
+                    <div class="" style="display: flex;"
+                         (mouseenter)="onMouseEnter(game.gameId, game.name, game.headerImageUrl)"
+                         (mouseleave)="onMouseLeave()">
                         <app-game-card [game]="game"></app-game-card>
                     </div>
                 }
@@ -37,56 +42,15 @@
                                 [totalPages]="totalPages"></app-pagination>
             </div>
 
-
-            <div class="side-nav">
-                <h4 class="side-nav__title">Horizon Forbidden West Complete Edition</h4>
-                <img src="../assets/image4.png" width="356" height="160" alt="" style="margin-bottom: 24px">
-                <div class="side-nav__content">
-                    <div class="mb-32">
-                        <p>Developer / Publisher</p>
-                        <span>Nixxes Softeare</span>
-                        <span>Playstation PC LLC</span>
-                    </div>
-
-                    <div class="mb-32">
-                        <p>Hisorical Low</p>
-                        <span class="span-price">-$45.45 </span>
-                        <span class="span-price--description">from GameSeal ( expired 15 hours agos)</span>
-                    </div>
-
-                    <div class="mb-32">
-                        <p>Reviews</p>
-                        <div class="reviews" style="display: flex; justify-content: space-between">
-                            <span class="span-reviews">Steam</span>
-                            <span class="span-reviews">Very Positive ( 1820)</span>
-                        </div>
-                        <div class="slider">
-                            <div class="slider--secondary"></div>
-                        </div>
-                    </div>
-
-                    <div class="mb-32">
-                        <p>Tags</p>
-                        <div class="" style="display: flex; gap: 12px">
-                            <div class="tag"># Action</div>
-                            <div class="tag"># Singleplayer</div>
-                        </div>
-
-                    </div>
-
-                    <div class="mb-32">
-                        <p>Features</p>
-                        <div class="" style="display: flex; gap: 12px">
-                            <div class="tag">Full controller support</div>
-                            <div class="tag">Single-player</div>
-                        </div>
-
-                    </div>
-
+            <div class="sidebar">
+                <div class="games-card" style="position: sticky; top: 500px">
+                    <app-game-detail-card [gameId]="hoveredGameId" [gameName]="hoveredGameName"
+                                          [gameImage]="hoveredGameImage"/>
                 </div>
-
             </div>
+
         </div>
+
 
     </div>
 </div>
