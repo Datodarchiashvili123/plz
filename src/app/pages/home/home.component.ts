@@ -1,13 +1,13 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {NgOptimizedImage} from "@angular/common";
-import {SlickCarouselModule} from "ngx-slick-carousel";
-import {ItemSliderComponent} from "../../shared/item-slider/item-slider.component";
-import {DealsCardComponent} from "../../shared/deals-card/deals-card.component";
-import {DealsCardsComponent} from "../../shared/blocks/deals-cards/deals-cards.component";
-import {HomeService} from "./home.service";
-import {RouterLink} from "@angular/router";
-import {SearchDropdownComponent} from "../../shared/search-dropdown/search-dropdown.component";
-import {Meta, Title} from "@angular/platform-browser";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { NgOptimizedImage } from "@angular/common";
+import { SlickCarouselModule } from "ngx-slick-carousel";
+import { ItemSliderComponent } from "../../shared/item-slider/item-slider.component";
+import { DealsCardComponent } from "../../shared/deals-card/deals-card.component";
+import { DealsCardsComponent } from "../../shared/blocks/deals-cards/deals-cards.component";
+import { HomeService } from "./home.service";
+import { RouterLink } from "@angular/router";
+import { SearchDropdownComponent } from "../../shared/search-dropdown/search-dropdown.component";
+import { Meta, Title } from "@angular/platform-browser";
 
 @Component({
     selector: 'app-home',
@@ -27,56 +27,31 @@ import {Meta, Title} from "@angular/platform-browser";
 })
 export class HomeComponent implements OnInit {
 
-    @Input() src: string | undefined;
-    @Input() name: string | undefined;
-    @Input() discount: string | undefined;
-    @Input() price: string | undefined;
     gamesData: any;
     sliderData: any;
-    // dealsCards: any = [];
-
     newDeals = [];
     bestDeals = [];
 
-
-    constructor(private homeService: HomeService, private titleService: Title, private metaService: Meta) {
-    }
+    constructor(private homeService: HomeService, private titleService: Title, private metaService: Meta) {}
 
     ngOnInit() {
+        this.titleService.setTitle('Game Deals - Best Discount and Offers on Top Games');
 
-        // Set meta title
-        this.titleService.setTitle('Game Deals - Best Discount and Offers on Top Games');  // <-- Set the title dynamically
+        this.updateMetaTags();
 
-        // Set meta description
-        this.metaService.addTags([
-            {
-                name: 'description',
-                content: `Find the best game deals on top titles with huge discounts! Explore daily offers and save big on the latest video games for all platforms. Don't miss out!`
-            }
-        ]);
-
-        // Fetch top game cards and update meta keywords
         this.homeService.getTopGameCards().subscribe((x: any) => {
             this.gamesData = x.popularGames;
+            this.sliderData = x.popularGames.map((game: any) => ({
+                title: game.name,
+                img: game.headerImageUrl,
+                price: game.lowestPriceText,
+                hasPrice: game.hasPrice,
+                gameId: game.gameId
+            }));
 
-            this.sliderData = x.popularGames.map((game: any) => {
-                return {
-                    title: game.name,
-                    img: game.headerImageUrl,
-                    price: game.lowestPriceText,
-                    hasPrice: game.hasPrice,
-                    gameId: game.gameId
-                }
-            });
-
-            // Create a keywords string from game names
             const keywords = x.popularGames.map((game: any) => game.name).join(', ');
 
-            // Set meta keywords
-            this.metaService.updateTag({
-                name: 'keywords',
-                content: `${keywords}, popular games, video game deals, new game releases, game discounts, best game deals, cheap video games, top-rated games, gaming offers, latest game discounts, game sales, PC games, console games, Xbox deals, PlayStation deals, Steam deals, game bundles, playze.io`
-            });
+            this.updateMetaTags(keywords);
         });
 
         this.homeService.getDealCards(1).subscribe((x: any) => {
@@ -88,5 +63,29 @@ export class HomeComponent implements OnInit {
         });
     }
 
+    updateMetaTags(keywords = '') {
+        const description = `Find the best game deals on top titles with huge discounts! Explore daily offers and save big on the latest video games for all platforms. Don't miss out!`;
 
+        this.removeExistingMetaTags();
+
+        this.metaService.addTags([
+            { name: 'description', content: description },
+            {
+                name: 'keywords',
+                content: `${keywords}, popular games, video game deals, new game releases, game discounts, best game deals, cheap video games, top-rated games, gaming offers, latest game discounts, game sales, PC games, console games, Xbox deals, PlayStation deals, Steam deals, game bundles, playze.io`
+            }
+        ]);
+    }
+
+    removeExistingMetaTags() {
+        const descriptionTag = this.metaService.getTag('name="description"');
+        if (descriptionTag) {
+            this.metaService.removeTag('name="description"');
+        }
+
+        const keywordsTag = this.metaService.getTag('name="keywords"');
+        if (keywordsTag) {
+            this.metaService.removeTag('name="keywords"');
+        }
+    }
 }

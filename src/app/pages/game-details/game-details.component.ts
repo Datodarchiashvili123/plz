@@ -108,7 +108,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
         });
     }
 
-    // Method to update meta tags dynamically based on game data
+// Method to update meta tags dynamically based on game data
     updateMetaTags() {
         const title = `${this.game.name} - Buy Now at Best Price!`;
         const description = `Get the best deals on ${this.game.name}. Explore reviews, screenshots, and offers for ${this.game.name} and similar games.`;
@@ -117,12 +117,31 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
         // Set the title
         this.titleService.setTitle(title);
 
-        // Set the description and keywords
+        // Remove existing meta tags to avoid duplicates
+        this.removeExistingMetaTags();
+
+        // Add new meta tags
         this.metaService.addTags([
             { name: 'description', content: description },
             { name: 'keywords', content: keywords },
         ]);
     }
+
+// Method to remove existing meta tags
+    removeExistingMetaTags() {
+        // Remove the description tag if it exists
+        const descriptionTag = this.metaService.getTag('name="description"');
+        if (descriptionTag) {
+            this.metaService.removeTag('name="description"');
+        }
+
+        // Remove the keywords tag if it exists
+        const keywordsTag = this.metaService.getTag('name="keywords"');
+        if (keywordsTag) {
+            this.metaService.removeTag('name="keywords"');
+        }
+    }
+
 
     ngOnDestroy() {
         if (this.routeSub) {
