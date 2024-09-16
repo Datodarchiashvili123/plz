@@ -52,8 +52,10 @@ export class GamesComponent implements OnInit {
     }
 
     loadGames(page: number, filters: any = {}, orderBy?: string, name?: string) {
-        this.gamesService.getGames(page, 10, filters, orderBy, name).subscribe(data => {
+        this.gamesService.cancelRequest();
+        this.gamesService.getGames(page, 10, filters, orderBy, name).subscribe((data: any) => {
             this.games = data.results;
+            console.log(this.games);
             this.totalPages = data.totalPages;
             this.currentPage = data.currentPage;
             this.onHover(this.games[0]?.gameId, this.games[0]?.gameName, this.games[0]?.headerImageUrl);
@@ -92,7 +94,6 @@ export class GamesComponent implements OnInit {
     }
 
     handleSearchChange(search: string) {
-        debugger
         this.searchValue = search;
         this.loadGames(1, this.currentFilters, this.orderBy, this.searchValue);
     }
